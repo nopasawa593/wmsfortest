@@ -1,0 +1,188 @@
+/* ====================================================================== */
+/* WMS THEME: Modern Dark Admin (Full Width Fix) */
+/* ====================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+:root {
+    /* Color Palette - Modern Dark */
+    --sidebar-bg: #111c43;       /* สีน้ำเงินเข้มเกือบดำ ตาม Reference */
+    --sidebar-color: #a3aed1;    /* สีตัวหนังสือจางๆ */
+    --sidebar-active-bg: #1b2a59;/* สีพื้นหลังตอนเลือก */
+    --sidebar-active-color: #fff;/* สีตัวหนังสือตอนเลือก */
+    
+    --body-bg: #f5f8fe;          /* สีพื้นหลัง Content */
+    --primary-color: #3b7ddd;    /* สีหลักปุ่ม/Link */
+    
+    /* Dimensions */
+    --sidebar-width: 260px;
+    --navbar-height: 70px;
+    --card-radius: 16px;
+}
+
+body {
+    font-family: 'Poppins', sans-serif; /* เปลี่ยนฟอนต์ใหม่ */
+    background-color: var(--body-bg);
+    margin: 0;
+    overflow-x: hidden;
+    color: #495057;
+}
+
+/* ---------------------------------- */
+/* 1. Layout Fix (แก้ปัญหาไม่เต็มจอ) */
+/* ---------------------------------- */
+#wrapper {
+    display: flex;
+    width: 100%;
+    align-items: stretch;
+    min-height: 100vh;
+}
+
+#sidebar-wrapper {
+    min-width: var(--sidebar-width);
+    max-width: var(--sidebar-width);
+    background: var(--sidebar-bg);
+    color: var(--sidebar-color);
+    transition: all 0.3s;
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+}
+
+#page-content-wrapper {
+    width: 100%;
+    flex-grow: 1; /* ขยายให้เต็มพื้นที่ที่เหลือ */
+    display: flex;
+    flex-direction: column;
+    min-width: 0; /* ป้องกัน Flex item ล้น */
+    background: var(--body-bg);
+}
+
+/* ---------------------------------- */
+/* 2. Sidebar Styling (แบบใหม่) */
+/* ---------------------------------- */
+.sidebar-heading {
+    padding: 1.5rem 1.5rem;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    background: rgba(0,0,0,0.1);
+}
+
+.sidebar-content {
+    padding: 1rem;
+    overflow-y: auto;
+}
+
+/* เมนูหลัก */
+.sidebar-header {
+    color: #6c757d;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin: 1.5rem 0 0.5rem 1rem;
+    font-weight: 600;
+}
+
+/* ลิงก์เมนู */
+.sidebar-link {
+    display: flex;
+    align-items: center;
+    padding: 0.75rem 1rem;
+    color: var(--sidebar-color);
+    text-decoration: none;
+    border-radius: 8px;
+    margin-bottom: 5px;
+    transition: all 0.2s ease-in-out;
+    font-weight: 500;
+    font-size: 0.95rem;
+    cursor: pointer;
+    border: none;
+    background: transparent;
+    width: 100%;
+    text-align: left;
+}
+
+.sidebar-link:hover, .sidebar-link.active, .sidebar-link[aria-expanded="true"] {
+    color: var(--sidebar-active-color);
+    background: var(--sidebar-active-bg);
+}
+
+.sidebar-link i {
+    font-size: 1.2rem;
+    margin-right: 12px;
+    width: 24px;
+    text-align: center;
+}
+
+/* Arrow Icon for Dropdown */
+.sidebar-link .arrow {
+    margin-left: auto; /* ดันไปขวาสุด */
+    font-size: 0.8rem;
+    transition: transform 0.3s;
+}
+
+.sidebar-link[aria-expanded="true"] .arrow {
+    transform: rotate(90deg);
+}
+
+/* Dropdown Menu (Submenu) */
+.sidebar-dropdown {
+    list-style: none;
+    padding-left: 0;
+    margin-bottom: 0;
+    background: rgba(0,0,0,0.1); /* สีพื้นหลัง dropdown เข้มขึ้นนิดนึง */
+    border-radius: 8px;
+    margin-top: 5px;
+    overflow: hidden;
+}
+
+.sidebar-dropdown .sidebar-item .sidebar-link {
+    padding-left: 3rem; /* ย่อหน้าเข้าไป */
+    font-size: 0.9rem;
+    background: transparent;
+}
+.sidebar-dropdown .sidebar-item .sidebar-link:hover {
+    color: #fff;
+}
+.sidebar-dropdown .sidebar-item .sidebar-link.active {
+    color: #fff;
+    font-weight: 600;
+}
+
+/* ---------------------------------- */
+/* 3. Top Navbar & Content */
+/* ---------------------------------- */
+.navbar-top {
+    height: var(--navbar-height);
+    background: #fff;
+    box-shadow: 0 0 2rem 0 rgba(33, 37, 41, .05);
+    padding: 0 2rem;
+}
+
+.container-fluid-content {
+    padding: 2rem;
+    width: 100%;
+    /* ลบ max-width ที่อาจจะบีบหน้าจอออก */
+}
+
+/* Cards Update */
+.card {
+    border: none;
+    box-shadow: 0 0 0.875rem 0 rgba(33, 40, 50, 0.05);
+    border-radius: var(--card-radius);
+}
+
+/* ---------------------------------- */
+/* 4. Mobile Responsive */
+/* ---------------------------------- */
+@media (max-width: 992px) {
+    #sidebar-wrapper {
+        margin-left: calc(var(--sidebar-width) * -1);
+    }
+    #wrapper.toggled #sidebar-wrapper {
+        margin-left: 0;
+    }
+}
